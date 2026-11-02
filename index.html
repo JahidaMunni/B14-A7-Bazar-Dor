@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাজার দর - Bazar Dor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50">
+    <script src="script.js"></script>
+
+    <!-- Navbar Section -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <!-- Top Row: Logo & Auth Buttons -->
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Left: Logo + Bazar Dor & Bangla Date -->
+            <div class="flex items-center gap-3">
+                <img src="logo-icon.png" alt="Logo" class="w-10 h-10 object-contain">
+                <div>
+                    <h1 class="text-xl font-bold text-green-700">বাজার দর</h1>
+                    <p id="bangla-date" class="text-xs text-gray-500">বাংলা তারিখ লোড হচ্ছে...</p>
+                </div>
+            </div>
+
+        <!-- Right: Auth Buttons (Sign In / Sign Up) -->
+<div class="flex gap-3">
+    <a href="signin.html" id="sign-in-btn" class="px-4 py-2 text-sm border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition inline-block text-center">সাইন ইন</a>
+    <a href="signup.html" id="sign-up-btn" class="px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition inline-block text-center">সাইন আপ</a>
+</div>
+        </div>
+
+        <!-- Second Row: Category Links -->
+        <nav class="border-t border-gray-100 py-2">
+            <div id="category-container" class="max-w-7xl mx-auto px-4 flex gap-6 overflow-x-auto whitespace-nowrap">
+                <!-- Dynamic categories will load here via JavaScript -->
+                <button class="px-3 py-1 bg-green-100 text-green-700 rounded-full font-medium text-sm">সকল পণ্য</button>
+            </div>
+        </nav>
+    </header>
+    <!-- Sort Dropdown Section -->
+<div class="max-w-7xl mx-auto px-4 mt-6 flex justify-end">
+    <div class="flex items-center gap-2">
+        <label for="sort-select" class="text-sm font-medium text-gray-700">সাজান:</label>
+        <select id="sort-select" class="px-3 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-green-600">
+            <option value="default">ডিফল্ট সর্ট</option>
+            <option value="low-to-high">দাম: কম থেকে বেশি</option>
+            <option value="high-to-low">দাম: বেশি থেকে কম</option>
+        </select>
+    </div>
+</div>
+
+    <!-- Price Ticker (Marquee) -->
+    <div class="bg-emerald-50 border-b border-emerald-100 py-2 overflow-hidden whitespace-nowrap">
+        <div id="price-ticker" class="inline-block text-sm text-emerald-800 font-medium">
+            🌾 চাল (নাজিরশাইল): ৭০ টাকা/কেজি (▲ ২%) | 🥔 আলু: ৪০ টাকা/কেজি (▼ ১%) | 🧅 পেঁয়াজ: ৯০ টাকা/কেজি (▲ ৫%)
+        </div>
+    </div>
+
+    <!-- Hero / Banner Section -->
+<section class="max-w-7xl mx-auto px-4 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+    <!-- Left Content -->
+    <div class="space-y-4">
+        <!-- Eyebrow / Small text -->
+        <span class="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
+            🌿 তাজা ও নিরাপদ বাজার
+        </span>
+        <!-- Main Heading -->
+        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            দৈনিক বাজারের সঠিক দর ও মান যাচাই করুন এক পলকে
+        </h1>
+        <!-- Subtitle -->
+        <p class="text-gray-600 text-base md:text-lg">
+            বাজারের নিত্যপ্রয়োজনীয় পণ্যের সঠিক মূল্য তালিকা, পাইকারি ও খুচরা দর এবং ক্যাটাগরি অনুযায়ী আপডেট পেতে আমাদের সাথে থাকুন।
+        </p>
+        <!-- Primary CTA Button (Anchor Link to Products) -->
+        <div>
+            <a href="#all-products" class="inline-block px-6 py-3 bg-green-600 text-white font-medium rounded-lg shadow-md hover:bg-green-700 transition">
+                বাজার দর দেখুন ↓
+            </a>
+        </div>
+    </div>
+
+    <!-- Right Banner Image -->
+    <div class="flex justify-center">
+        <img src="bazar-hero.png" alt="Bazar Hero Image" class="w-full max-w-md object-contain rounded-xl shadow-sm">
+    </div>
+</section>
+<!-- Main Content Area -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+
+    <!-- Section A: Price Risers (আজ দাম বেড়েছে) -->
+    <section>
+        <div class="flex items-center gap-2 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">আজ দাম বেড়েছে</h2>
+            <span class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">▲ Top 6</span>
+        </div>
+        
+        <!-- Grid Container for Risers -->
+        <div id="risers-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic Risers Cards Will Be Injected Here via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Section B: Price Fallers (আজ দাম কমেছে) -->
+    <section>
+        <div class="flex items-center gap-2 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">আজ দাম কমেছে</h2>
+            <span class="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs font-bold">▼ Top 6</span>
+        </div>
+
+        <!-- Grid Container for Fallers -->
+        <div id="fallers-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic Fallers Cards Will Be Injected Here via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Section C: All Products (সব পণ্য) -->
+    <section id="all-products" class="scroll-mt-20">
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">সব পণ্য</h2>
+            <p class="text-gray-500 text-sm">বাজারের সকল পণ্যের হালনাগাদ দর এক নজরে দেখে নিন</p>
+        </div>
+
+        <!-- Grid Container for All Products -->
+        <div id="all-products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Sample Card UI (Static Demo Card for Professional Layout Visual) -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col justify-between cursor-pointer">
+                <div>
+                    <!-- Emoji & Change Badge Row -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl">
+                            🌾
+                        </div>
+                        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-red-50 text-red-600 border border-red-100">
+                            ▲ ২.৫%
+                        </span>
+                    </div>
+
+                    <!-- Title & Unit -->
+                    <h3 class="text-lg font-bold text-gray-800 mb-1">নাজিরশাইল চাল</h3>
+                    <p class="text-xs text-gray-400 font-medium mb-4">প্রতি কেজি</p>
+                </div>
+
+                <!-- Price Row -->
+                <div class="border-t border-gray-50 pt-3 flex justify-between items-center">
+                    <span class="text-xs text-gray-500">আজকের দাম</span>
+                    <span class="text-base font-extrabold text-emerald-700">৭০ টাকা</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+<!-- Footer Section -->
+    <footer class="bg-white border-t border-gray-100 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <!-- Left Side -->
+            <div>
+                <h3 class="text-lg font-bold text-green-700">বাজার দর</h3>
+                <p class="text-sm text-gray-500 mt-1">প্রয়োজনীয় পণ্যের দাম এক নজরে।</p>
+            </div>
+            
+            <!-- Right Side -->
+            <div>
+                <p class="text-sm text-gray-500">সকল দাম সম্ভাব্য, বাজার অবস্থার ওপর নির্ভর করে পরিবর্তিত হয়।</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+ </footer>
+
+</body>
+</html>
